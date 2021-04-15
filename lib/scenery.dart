@@ -1,3 +1,4 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class _SceneryState extends State<Scenery> {
   @override
   Widget build(BuildContext context) {
     final myTheme = Provider.of<MyTheme>(context, listen: false);
+    final themeProvidernatural = Provider.of<MyTheme>(context);
     return LayoutBuilder(
       builder: (context, constraints) => Stack(
         children: [
@@ -57,35 +59,52 @@ class _SceneryState extends State<Scenery> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: RadioListTile<ThemeType>(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 4),
-                        title: const Text('Light'),
-                        groupValue: myTheme.themeType,
-                        value: ThemeType.Light,
-                        onChanged: (ThemeType? mode) =>
-                            myTheme.setThemeType(ThemeType.Light),
-                      ),
+                      child: ThemeSwitcher(
+                          clipper: ThemeSwitcherCircleClipper(),
+                          builder: (context) {
+                            return RadioListTile<ThemeType>(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 4),
+                                title: const Text('Light'),
+                                groupValue: myTheme.themeType,
+                                value: ThemeType.Light,
+                                onChanged: (ThemeType? mode) {
+                                  myTheme.setThemeType(ThemeType.Light);
+                                  ThemeSwitcher.of(context)?.changeTheme(
+                                    theme:
+                                        themeProvidernatural.currentThemeData,
+                                  );
+                                });
+                          }),
                     ),
                     Expanded(
-                      child: RadioListTile<ThemeType>(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 4),
-                        title: const Text('Dark'),
-                        groupValue: myTheme.themeType,
-                        value: ThemeType.Dark,
-                        onChanged: (ThemeType? mode) =>
-                            myTheme.setThemeType(ThemeType.Dark),
-                      ),
+                      child: ThemeSwitcher(
+                          // clipper: ,
+                          builder: (context) {
+                        return RadioListTile<ThemeType>(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                          title: const Text('Dark'),
+                          groupValue: myTheme.themeType,
+                          value: ThemeType.Dark,
+                          onChanged: (ThemeType? mode) {
+                            myTheme.setThemeType(ThemeType.Dark);
+                            ThemeSwitcher.of(context)?.changeTheme(
+                              theme: themeProvidernatural.currentThemeData,
+                            );
+                          },
+                        );
+                      }),
                     ),
-                    Expanded(
-                      child: RadioListTile<ThemeType>(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 4),
-                        title: const Text('Other'),
-                        groupValue: myTheme.themeType,
-                        value: ThemeType.Other,
-                        onChanged: (ThemeType? mode) =>
-                            myTheme.setThemeType(ThemeType.Other),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: RadioListTile<ThemeType>(
+                    //     contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                    //     title: const Text('Other'),
+                    //     groupValue: myTheme.themeType,
+                    //     value: ThemeType.Other,
+                    //     onChanged: (ThemeType? mode) =>
+                    //         myTheme.setThemeType(ThemeType.Other),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

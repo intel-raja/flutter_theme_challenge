@@ -21,8 +21,8 @@ class CustomWidgetThemes {
       case ThemeType.Light:
         sceneryThemeData = SceneryThemeData(
           skyFillColor: Colors.blue.shade100,
-          mountainFillColor: Colors.blueGrey,
-          waterFillColor: Colors.blueGrey[800]!,
+          mountainFillColor: Colors.brown,
+          waterFillColor: Colors.blue.shade300,
           drawMoon: false,
           drawSun: true,
         );
@@ -30,8 +30,8 @@ class CustomWidgetThemes {
       case ThemeType.Dark:
         sceneryThemeData = SceneryThemeData(
           skyFillColor: Colors.grey,
-          mountainFillColor: Colors.blueGrey,
-          waterFillColor: Colors.blueGrey[800]!,
+          mountainFillColor: Colors.brown.shade300,
+          waterFillColor: Colors.blueGrey,
           drawMoon: true,
           drawSun: false,
         );

@@ -33,23 +33,40 @@ class MyTheme with ChangeNotifier {
         return ThemeData.light().copyWith(
           primaryColor: Colors.green,
           textTheme: TextTheme(
-            headline1: GoogleFonts.caveat(color: Colors.lightGreen),
-            headline2: GoogleFonts.caveat(color: Colors.lightGreen),
-            headline3: GoogleFonts.caveat(color: Colors.lightGreen),
-            headline4: GoogleFonts.caveat(color: Colors.lightGreen),
-            headline5: GoogleFonts.caveat(color: Colors.lightGreen),
-            headline6: GoogleFonts.caveat(color: Colors.lightGreen),
-            subtitle1: GoogleFonts.caveat(color: Colors.lightGreen),
-            subtitle2: GoogleFonts.caveat(color: Colors.lightGreen),
-            bodyText1: GoogleFonts.caveat(color: Colors.lightGreen),
-            bodyText2: GoogleFonts.caveat(color: Colors.lightGreen),
-            caption: GoogleFonts.caveat(color: Colors.lightGreen),
-            button: GoogleFonts.caveat(color: Colors.lightGreen),
-            overline: GoogleFonts.caveat(color: Colors.lightGreen),
+            headline1: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
+            headline2: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
+            headline3: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
+            headline4: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
+            headline5: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
+            headline6: GoogleFonts.caveat(color: Colors.black, fontSize: 28),
+            subtitle1: GoogleFonts.caveat(color: Colors.black, fontSize: 23),
+            subtitle2: GoogleFonts.caveat(color: Colors.black, fontSize: 23),
+            bodyText1: GoogleFonts.caveat(color: Colors.black, fontSize: 22),
+            bodyText2: GoogleFonts.caveat(color: Colors.black, fontSize: 22),
+            caption: GoogleFonts.caveat(color: Colors.black, fontSize: 22),
+            button: GoogleFonts.caveat(color: Colors.black, fontSize: 22),
+            overline: GoogleFonts.caveat(color: Colors.black, fontSize: 22),
           ),
         );
       case ThemeType.Dark:
-        return ThemeData.dark();
+        return ThemeData.dark().copyWith(
+          primaryColor: Colors.black,
+          textTheme: TextTheme(
+            headline1: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
+            headline2: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
+            headline3: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
+            headline4: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
+            headline5: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
+            headline6: GoogleFonts.dosis(color: Colors.white, fontSize: 28),
+            subtitle1: GoogleFonts.dosis(color: Colors.white, fontSize: 23),
+            subtitle2: GoogleFonts.dosis(color: Colors.white, fontSize: 23),
+            bodyText1: GoogleFonts.dosis(color: Colors.white, fontSize: 22),
+            bodyText2: GoogleFonts.dosis(color: Colors.white, fontSize: 22),
+            caption: GoogleFonts.dosis(color: Colors.white, fontSize: 22),
+            button: GoogleFonts.dosis(color: Colors.white, fontSize: 22),
+            overline: GoogleFonts.dosis(color: Colors.white, fontSize: 22),
+          ),
+        );
       case ThemeType.Other:
         return ThemeData();
     }
