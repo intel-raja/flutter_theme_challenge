@@ -38,10 +38,10 @@ class CustomWidgetThemes {
         break;
       case ThemeType.Other:
         sceneryThemeData = SceneryThemeData(
-          skyFillColor: Colors.grey,
-          mountainFillColor: Colors.blueGrey,
-          waterFillColor: Colors.blueGrey[800]!,
-          drawMoon: true,
+          skyFillColor: Colors.red.shade100,
+          mountainFillColor: Colors.deepOrange.shade300,
+          waterFillColor: Colors.lightBlue.shade100,
+          drawMoon: false,
           drawSun: false,
         );
         break;

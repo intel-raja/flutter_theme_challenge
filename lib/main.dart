@@ -1,5 +1,5 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_theme_chellenge/scenery.dart';
 import 'package:flutter_theme_chellenge/themes/my_theme.dart';
 
@@ -20,16 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<MyTheme>(context);
-    return ThemeProvider(
-      initTheme: themeProvider.currentThemeData,
-      child: Builder(builder: (BuildContext context) {
-        return MaterialApp(
-          title: 'Theming Mini Challenge',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeProvider.of(context),
-          home: MyHomePage(title: 'Theming Mini Challenge'),
-        );
-      }),
+    return MaterialApp(
+      title: 'Flutter Theme Challenge',
+      debugShowCheckedModeBanner: false,
+      theme: themeProvider.currentThemeData,
+      home: MyHomePage(title: 'Flutter Theme Challenge'),
     );
   }
 }
@@ -46,16 +41,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return ThemeSwitchingArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            widget.title,
-            style: Theme.of(context).textTheme.headline6,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
-        body: Scenery(),
       ),
+      body: Scenery(),
     );
   }
 }

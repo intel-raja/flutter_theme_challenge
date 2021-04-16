@@ -1,5 +1,5 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 import 'package:provider/provider.dart';
 
 import 'scenery_painter.dart';
@@ -12,13 +12,11 @@ class Scenery extends StatefulWidget {
 }
 
 class _SceneryState extends State<Scenery> {
-  // You can adjust this, as needed, but it should not change with the theme.
   final _textAreaHeight = 250.0;
 
   @override
   Widget build(BuildContext context) {
     final myTheme = Provider.of<MyTheme>(context, listen: false);
-    final themeProvidernatural = Provider.of<MyTheme>(context);
     return LayoutBuilder(
       builder: (context, constraints) => Stack(
         children: [
@@ -33,13 +31,16 @@ class _SceneryState extends State<Scenery> {
                   .sceneryThemeData!
                   .mountainFillColor,
               textHeight: _textAreaHeight,
-              drawSun: CustomWidgetThemes.of(context).sceneryThemeData!.drawSun,
-              drawMoon:
-                  CustomWidgetThemes.of(context).sceneryThemeData!.drawMoon,
             ),
             child: Container(),
           ),
-          //todo(you) - Can you find a way to toggle this text area background color according to the theme?
+          if (CustomWidgetThemes.of(context).sceneryThemeData!.drawSun)
+            RubberBand(
+              child: CustomPaint(
+                foregroundPainter: SunPainter(textHeight: _textAreaHeight),
+                child: Container(),
+              ),
+            ),
           Positioned(
             bottom: 0,
             child: Container(
@@ -48,6 +49,18 @@ class _SceneryState extends State<Scenery> {
               child: const SomeText(),
             ),
           ),
+          if (CustomWidgetThemes.of(context).sceneryThemeData!.drawMoon)
+            RubberBand(
+              child: CustomPaint(
+                foregroundPainter: MoonPainter(
+                  textHeight: _textAreaHeight,
+                  skyColor: CustomWidgetThemes.of(context)
+                      .sceneryThemeData!
+                      .skyFillColor,
+                ),
+                child: Container(),
+              ),
+            ),
           Positioned(
             bottom: 0,
             right: 0,
@@ -59,57 +72,53 @@ class _SceneryState extends State<Scenery> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: ThemeSwitcher(
-                          clipper: ThemeSwitcherCircleClipper(),
-                          builder: (context) {
-                            return RadioListTile<ThemeType>(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 4),
-                                title: const Text('Light'),
-                                groupValue: myTheme.themeType,
-                                value: ThemeType.Light,
-                                onChanged: (ThemeType? mode) {
-                                  myTheme.setThemeType(ThemeType.Light);
-                                  ThemeSwitcher.of(context)?.changeTheme(
-                                    theme:
-                                        themeProvidernatural.currentThemeData,
-                                  );
-                                });
+                      child: RadioListTile<ThemeType>(
+                          activeColor: Theme.of(context).primaryColor,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                          title: const Text('Light'),
+                          groupValue: myTheme.themeType,
+                          value: ThemeType.Light,
+                          onChanged: (ThemeType? mode) {
+                            myTheme.setThemeType(ThemeType.Light);
                           }),
                     ),
                     Expanded(
-                      child: ThemeSwitcher(
-                          // clipper: ,
-                          builder: (context) {
-                        return RadioListTile<ThemeType>(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 4),
-                          title: const Text('Dark'),
-                          groupValue: myTheme.themeType,
-                          value: ThemeType.Dark,
-                          onChanged: (ThemeType? mode) {
-                            myTheme.setThemeType(ThemeType.Dark);
-                            ThemeSwitcher.of(context)?.changeTheme(
-                              theme: themeProvidernatural.currentThemeData,
-                            );
-                          },
-                        );
-                      }),
+                      child: RadioListTile<ThemeType>(
+                        activeColor: Theme.of(context).primaryColor,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                        title: const Text('Dark'),
+                        groupValue: myTheme.themeType,
+                        value: ThemeType.Dark,
+                        onChanged: (ThemeType? mode) {
+                          myTheme.setThemeType(ThemeType.Dark);
+                        },
+                      ),
                     ),
-                    // Expanded(
-                    //   child: RadioListTile<ThemeType>(
-                    //     contentPadding: EdgeInsets.symmetric(horizontal: 4),
-                    //     title: const Text('Other'),
-                    //     groupValue: myTheme.themeType,
-                    //     value: ThemeType.Other,
-                    //     onChanged: (ThemeType? mode) =>
-                    //         myTheme.setThemeType(ThemeType.Other),
-                    //   ),
-                    // ),
+                    Expanded(
+                      child: RadioListTile<ThemeType>(
+                        activeColor: Theme.of(context).primaryColor,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                        title: const Text('Other'),
+                        groupValue: myTheme.themeType,
+                        value: ThemeType.Other,
+                        onChanged: (ThemeType? mode) =>
+                            myTheme.setThemeType(ThemeType.Other),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ),
+          if ((CustomWidgetThemes.of(context).sceneryThemeData!.drawMoon ||
+                  CustomWidgetThemes.of(context).sceneryThemeData!.drawSun) ==
+              false)
+            RubberBand(
+              child: CustomPaint(
+                foregroundPainter: SunPainter(textHeight: _textAreaHeight),
+                child: Container(),
+              ),
+            ),
         ],
       ),
     );

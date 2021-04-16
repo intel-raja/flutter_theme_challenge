@@ -8,26 +8,20 @@ class SceneryPainter extends CustomPainter {
     required this.mountainColor,
     required this.skyColor,
     required this.textHeight,
-    required this.drawSun,
-    required this.drawMoon,
   });
 
   final Color waterColor;
   final Color mountainColor;
   final Color skyColor;
   final double textHeight;
-  final bool drawSun;
-  final bool drawMoon;
 
   final _paint = Paint();
 
-  Offset _center = Offset.zero;
   double _canvasHeight = 0;
 
   @override
   void paint(Canvas canvas, Size size) {
     _canvasHeight = size.height - textHeight;
-    _center = Offset(size.width / 2, _canvasHeight / 2);
 
     _drawSeaAndSky(canvas, size);
     _drawMountains(
@@ -40,13 +34,6 @@ class SceneryPainter extends CustomPainter {
       size: size,
       isMountain: false,
     );
-
-    if (drawSun) {
-      _drawSun(canvas);
-    }
-    if (drawMoon) {
-      _drawMoon(canvas);
-    }
   }
 
   void _drawSeaAndSky(Canvas canvas, Size size) {
@@ -81,11 +68,16 @@ class SceneryPainter extends CustomPainter {
       upOrDown = -1;
     }
 
-    final leftMtLeftPt = Offset(0, reflectionHeightDelta + upOrDown * skyHeight);
-    final leftMtPeakPt = Offset(size.width / 4, reflectionHeightDelta + upOrDown * _canvasHeight * .5);
-    final leftMtRtPt = Offset(size.width / 2, reflectionHeightDelta + upOrDown * _canvasHeight * .58);
-    final rtMtPeakPt = Offset(3 * size.width / 4, reflectionHeightDelta + upOrDown * _canvasHeight * .4);
-    final rtMtRtPt = Offset(size.width, reflectionHeightDelta + upOrDown * skyHeight);
+    final leftMtLeftPt =
+        Offset(0, reflectionHeightDelta + upOrDown * skyHeight);
+    final leftMtPeakPt = Offset(
+        size.width / 4, reflectionHeightDelta + upOrDown * _canvasHeight * .5);
+    final leftMtRtPt = Offset(
+        size.width / 2, reflectionHeightDelta + upOrDown * _canvasHeight * .58);
+    final rtMtPeakPt = Offset(3 * size.width / 4,
+        reflectionHeightDelta + upOrDown * _canvasHeight * .4);
+    final rtMtRtPt =
+        Offset(size.width, reflectionHeightDelta + upOrDown * skyHeight);
 
     final mtPath = Path();
     mtPath.moveTo(leftMtLeftPt.dx, leftMtLeftPt.dy);
@@ -97,7 +89,25 @@ class SceneryPainter extends CustomPainter {
     canvas.drawPath(mtPath, _paint);
   }
 
-  void _drawSun(Canvas canvas) {
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class SunPainter extends CustomPainter {
+  SunPainter({required this.textHeight});
+  final double textHeight;
+  final _paint = Paint();
+
+  Offset _center = Offset.zero;
+  double _canvasHeight = 0;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    _canvasHeight = size.height - textHeight;
+    _center = Offset(size.width / 2, _canvasHeight / 2);
+
     final sunCenter = _center - Offset(3 * _center.dx / 4, _center.dy / 2);
     final innerRadius = 40.0;
     final outerRadius = innerRadius + innerRadius / 3;
@@ -119,7 +129,25 @@ class SceneryPainter extends CustomPainter {
     canvas.drawCircle(sunCenter, outerRadius, paintWithShader);
   }
 
-  void _drawMoon(Canvas canvas) {
+  @override
+  bool shouldRepaint(SunPainter oldDelegate) => false;
+}
+
+class MoonPainter extends CustomPainter {
+  MoonPainter({required this.skyColor, required this.textHeight});
+  final double textHeight;
+  final _paint = Paint();
+
+  Offset _center = Offset.zero;
+
+  double _canvasHeight = 0;
+  final Color skyColor;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    _canvasHeight = size.height - textHeight;
+    _center = Offset(size.width / 2, _canvasHeight / 2);
+
     final moonCenter = _center + Offset(3 * _center.dx / 4, -_center.dy / 2);
     final outerRadius = 40.0;
     final innerRadius = outerRadius * .75;
@@ -146,7 +174,5 @@ class SceneryPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
+  bool shouldRepaint(MoonPainter oldDelegate) => false;
 }

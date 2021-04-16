@@ -31,7 +31,7 @@ class MyTheme with ChangeNotifier {
     switch (themeType) {
       case ThemeType.Light:
         return ThemeData.light().copyWith(
-          primaryColor: Colors.green,
+          primaryColor: Colors.amberAccent,
           textTheme: TextTheme(
             headline1: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
             headline2: GoogleFonts.caveat(color: Colors.black, fontSize: 48),
@@ -50,7 +50,7 @@ class MyTheme with ChangeNotifier {
         );
       case ThemeType.Dark:
         return ThemeData.dark().copyWith(
-          primaryColor: Colors.black,
+          primaryColor: Colors.blueGrey,
           textTheme: TextTheme(
             headline1: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
             headline2: GoogleFonts.dosis(color: Colors.white, fontSize: 48),
@@ -68,7 +68,24 @@ class MyTheme with ChangeNotifier {
           ),
         );
       case ThemeType.Other:
-        return ThemeData();
+        return ThemeData.light().copyWith(
+          primaryColor: Colors.redAccent,
+          textTheme: TextTheme(
+            headline1: GoogleFonts.farsan(color: Colors.black, fontSize: 48),
+            headline2: GoogleFonts.farsan(color: Colors.black, fontSize: 48),
+            headline3: GoogleFonts.farsan(color: Colors.black, fontSize: 48),
+            headline4: GoogleFonts.farsan(color: Colors.black, fontSize: 48),
+            headline5: GoogleFonts.farsan(color: Colors.black, fontSize: 48),
+            headline6: GoogleFonts.farsan(color: Colors.black, fontSize: 28),
+            subtitle1: GoogleFonts.farsan(color: Colors.black, fontSize: 23),
+            subtitle2: GoogleFonts.farsan(color: Colors.black, fontSize: 23),
+            bodyText1: GoogleFonts.farsan(color: Colors.black, fontSize: 22),
+            bodyText2: GoogleFonts.farsan(color: Colors.black, fontSize: 22),
+            caption: GoogleFonts.farsan(color: Colors.black, fontSize: 22),
+            button: GoogleFonts.farsan(color: Colors.black, fontSize: 22),
+            overline: GoogleFonts.farsan(color: Colors.black, fontSize: 22),
+          ),
+        );
     }
   }
 }
