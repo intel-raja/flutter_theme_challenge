@@ -133,11 +133,11 @@ class SomeText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Flaiku',
+          'Ajeeth Raja S',
           style: Theme.of(context).textTheme.headline3,
         ),
         Text(
-          'Anonymous',
+          '(Normal Human)',
           style: Theme.of(context).textTheme.subtitle1,
         ),
         const SizedBox(height: 8),
@@ -150,7 +150,7 @@ class SomeText extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyText1,
         ),
         Text(
-          'We hope you have fun :)',
+          'I hope you have fun :)',
           style: Theme.of(context).textTheme.bodyText1,
         ),
       ],
