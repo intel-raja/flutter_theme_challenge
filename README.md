@@ -4,4 +4,4 @@ Flutter Mini Theme challenge
 
 ## Getting Started
 
-![alt-text]()
+![alt-text](assets/20210416_123819.gif)
