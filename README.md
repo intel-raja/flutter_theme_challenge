@@ -1,6 +1,7 @@
 # flutter_theme_chellenge
 
-A new Flutter project.
+Flutter Mini Theme challenge
 
 ## Getting Started
 
+![alt-text]()
